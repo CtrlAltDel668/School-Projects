@@ -1,102 +1,109 @@
 import random
+import dula
+import roulette
 class Jumble_Game():
+    
+    def __init__(self,player):
+        self.player = player
+    
+    def play(self):
+        Hp = 3
+        Score = 0
+        temp_cat= []
+        print('********************************************************')
+        print('Legend:')
+        print('    Category 1(ANIMALS) press 1')
+        print('    Category 2(COUNTRIES) press 2')
+        print('    Category 3(DINOSAURS) press 3')
+        print('[CAUTION!!! Answer with care!!]')
+        print('********************************************************')
+        y = int(input('Enter a number(1-3) : '))
+        if y == 1:
+            temp_cat.append('hyena')
+            temp_cat.append('moose')
+            temp_cat.append('skunk')
+            temp_cat.append('peacock')
+            temp_cat.append('wildebeest')
+        if y == 2:
+            temp_cat.append('cuba')
+            temp_cat.append('chad')
+            temp_cat.append('ukraine')
+            temp_cat.append('bahrain')
+            temp_cat.append('afghanistan')
+        if y == 3:
+            temp_cat.append('aardonyx')
+            temp_cat.append('triceratops')
+            temp_cat.append('tyrannosaurus')
+            temp_cat.append('apatosaurus')
+            temp_cat.append('brachiosaurus')
+        
+        while True :
+            
+            while True :
+                print('Health Points : ',Hp)
+                list1 = temp_cat
+                x = list1[0]
+                o = x.upper()
+                char_word = list(o)
+                random.shuffle(char_word)
+                name1 = ','.join(char_word)
+                if y == 1 :
+                    print('')
+                    print(char_word)
+                    input_word = input('Enter a word : ')
+                        
+                    if input_word == x :
+                        print('Correct!')
+                        Score = Score + 1
+                        list1.remove(x)
+                    else :
+                        select1 = dula.select(x)
+                        select1.Hint1()
+                        
+                if y == 2 :
+                    
+                    print(char_word)
+                    input_word = input('Enter a word : ')
+                    if input_word == x :
+                        print('Correct!')
+                        Score = Score + 1
+                        list1.remove(x)
+                    else :
+                        select1 = dula.select(x)
+                        select1.Hint2()
+                        
+                if y == 3 :
+                    #y = [element.upper() for element in char_word]
+                    print(char_word)
+                    input_word = input('Enter a word : ')
+                    
+                    if input_word == x :
+                        print('Correct!')
+                        Score = Score + 1
+                        list1.remove(x)
+                    else :
+                        select1 = dula.select(x)
+                        select1.Hint3()
+                        
+                if input_word != x :
+                    break
+                
+                if (len(list1)) == 0 :
+                    print('CONGRATULATIONS!! YOU CLEARED THE CATEGORY!!')
+                    break
+                
+            if (len(list1)) == 0 :
+                print('SCORE : ',Score)
+                break
+            
+            Hp = Hp - 1   
+            if Hp == 0:
+                print('GAMEOVER!!! prepare for punishment!!')
+                print('SCORE : ',Score)
+                print('********************************************************')
+                k = roulette.RR(Hp)
+                k.kapoy()
+                break
 
-	def __init__(self,player):
-		self.player = player
-
-	def selection(self,x):
-		self.x = int(input('enter a number from 1-3 : '))
-		if x == 1 :
-			self.catergory1 = ['cat','dog','mouse']
-		if x == 2 :
-			self.catergory2 = ['book','pencil','pen']
-	 	if x == 3:
-	 		self.catergory3 = ['ball','net','shoes']
-
-	def play(self):
-		list1 = self.selection()
-		y = random.choice(list1)
-		char_name2 = list(y)
-		random.shuffle(char_name2)
-
-		while True :
-			while True :
-				list1 = self.selection()
-				x = random.choice(list1)
-				char_name2 = list(y)
-				random.shuffle(char_name2)
-
-				if self.x == 1 :
-					String_name1 = ','.join(char_name2)
-					print(char_name2)
-					c = input('enter a word : ')
-
-					if c == x :
-						print('win!!')
-						self.player.score()
-					else:
-						 print("try again!!")
-                		indexInt = [1,2,3]
-                		hint = random.choice(indexInt)
-                		if hint == 1 and x == 'dog' :
-                    		print('H!NT : IT IS A MAMMAL')
-                    		indexInt.remove(hint)
-                		if hint == 2 and x == 'dog' :
-                    		print('H!NT : IT IS A DOMESTICATED ANIMAL')
-                    		indexInt.remove(hint)
-                		if hint == 3 and x == 'dog' :
-                    		print('H!NT : IT HAS FOUR LEGS')
-                    		indexInt.remove(hint)
-            		########################################################   
-                		if hint == 1 and x == 'cat' :
-                    		print('H!NT : IT IS A MAMMAL')
-                    		indexInt.remove(hint)
-                		if hint == 2 and x == 'cat' :
-                    		print('H!NT : IT IS A DOMESTICATED ANIMAL')
-                    		indexInt.remove(hint)
-                		if hint == 3 and x == 'cat' :
-                    		print('H!NT : IT HAS FOUR LEGS')
-                    		indexInt.remove(hint)
-             		#######################################################       
-                		if hint == 1 and x == 'mouse' :
-                    		print('H!NT : IT IS A TYPE OF RODENT')
-                    		indexInt.remove(hint)
-                		if hint == 2 and x == 'mouse' :
-                   			print('H!NT : IT IS A SMALL ANIMAL')
-                    		indexInt.remove(hint)
-                		if hint == 3 and x == 'mouse' :
-                    		print('H!NT : IT HAS SMALL ROUNDED EARS')
-                    		indexInt.remove(hint)
-				if c != x:
-					break
-			self.player.HP()
-			if self.player.get_HP() == 0:
-				print('GAMEOVER!!!')
-        		print('SCORE : ',self.player.get_score())
-				break
-
-
-class player():
-	
-	def __init__(self,name):
-		self.name = name
-		self.HP = 3
-		self.score = 0
-
-	def get_name(self):
-		return self.name
-	def get_HP(self):
-		return self.HP
-	def get_score(self):
-		return self.score
-	def Hp (self):
-		self.HP = self.HP -1
-	def score(self):
-		self.score = self.score + 1
-	#def move(self):
-	#	catergory1 = [cat,dog,mouse]
-	#	return random.choice(catergory1)
-	#	catergory2 = [book,pencil,pen]
-	#	return random.choice(catergory2)
-	#	catergory3 = [ball,net,shoes]
-	#	return random.choice(catergory3)
+kent = Jumble_Game('casssie')
+kent.play()
