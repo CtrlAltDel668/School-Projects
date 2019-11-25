@@ -1,28 +1,3 @@
-class Queue(object):
-    def __init__(self):
-        self.items = []
-
-    def enqueue(self, item):
-        self.items.insert(0, item)
-
-    def dequeue(self):
-        if not self.is_empty():
-            return self.items.pop()
-
-    def is_empty(self):
-        return len(self.items) == 0
-
-    def peek(self):
-        if not self.is_empty():
-            return self.items[-1].key
-
-    def __len__(self):
-        return self.size()
-
-    def size(self):
-        return len(self.items)
-
-
 class BinaryTree:
 	def __init__(self,rootObj):
 		self.key=rootObj
@@ -72,7 +47,6 @@ class BinaryTree:
 #External method for the preOrder traversal
 
 def preOrderTraversal(tree):
-	
 	if tree:
 		print(tree.getRootVal())
 		preOrderTraversal(tree.getLeftChild())
@@ -93,32 +67,12 @@ def postOrderTraversal(tree):
 		postOrderTraversal(tree.getLeftChild())
 		postOrderTraversal(tree.getRightChild())
 		print(tree.getRootVal())
-# method for the levelorder traversal
-def levelOrderTraversal(tree):
-	if tree is None :
-		return
-	queue = Queue()
-	queue.enqueue(tree)
-	trav_ = ""
-	while len(queue) > 0 :
-		trav_ += str(queue.peek()) + '-'
-		node = queue.dequeue()
-		if node.leftChild:
-			queue.enqueue(node.leftChild)
-		if node.rightChild:
-			queue.enqueue(node.rightChild)
-
-	return trav_
 
 r = BinaryTree('a')
 r.insertLeft('b')
-r.insertRight('d')
-r.insertLeft('b')
-r.insertLeft('b')
-r.insertLeft('b')
-r.insertRight('d')
-r.insertRight('d')
-r.insertRight('d')
+r.insertRight('c')
+r.insertLeft('d')
+r.insertRight('e')
 print("The answer to the preOrderTraversal is below")
 preOrderTraversal(r)
 
@@ -127,6 +81,3 @@ inOrderTraversal(r)
 
 print("The answer to the postOrderTraversal is below")
 postOrderTraversal(r)
-
-print("The answer to the levelOrderTraversal is below")
-print(levelOrderTraversal(r))

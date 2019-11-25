@@ -4,7 +4,7 @@ class Stack():
   def __init__(self):
     self.num_items = 0
             
-  def push(self item):
+  def push(self, item):
 
     if (self.num_items ==0):
       self.item = item
@@ -21,7 +21,7 @@ class Stack():
     if (self.num_items != 0):
                 
       self.temp_item = self.item.get_next()
-      self.temp_item.set_prev(np.NaN)
+      self.temp_item.set_prev(None)
       self.item = self.temp_item
                 
       self.num_items -= 1
@@ -31,10 +31,10 @@ class Stack():
 
 class Item():
         
-  def __init__(self value):
+  def __init__(self, value):
     self.value = value
-    self.next = np.NaN
-    self.prev = np.NaN
+    self.next = None
+    self.prev = None
             
   def get_next(self):
     return self.next
@@ -42,10 +42,10 @@ class Item():
     def get_prev(self):
       return self.prev
         
-    def set_next(selfnext_):
+    def set_next(self,next_):
       self.next = next_
         
-    def set_prev(selfprev_):
+    def set_prev(self,prev_):
       self.prev =prev_
             
     def get_value(self):
@@ -71,4 +71,3 @@ stack.peek()
 stack.pop()
  
 stack.peek()
-  
